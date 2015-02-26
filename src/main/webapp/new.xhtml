@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="/new-template.xhtml">
+
+         <ui:define name="body">
+
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="navbar-brand">VScan</li>
+  <li role="presentation"><a href="./">Strona Głowna</a></li>
+  <li role="presentation"  class="active"><a href="new.xhtml" >Dodaj nową teczke</a></li>
+  <li role="presentation"><a href="search.xhtml" >Znajdź prawnika</a></li>
+
+</ul>
+
+        </ui:define>
+         <ui:define name="newOrderForm">
+            <h:form>
+                <h:outputLabel for="orderIdInputText" rendered="true" value="Numer sprawy:&nbsp;" />
+                <h:inputText id="orderIdInputText" class="input-sm" required="true" value="#{orderManager.newOrderId}" /><br />
+
+
+                <h:outputLabel for="shipmentInfoInputText" rendered="true" value="Opis:&nbsp;" />
+                <h:inputText id="shipmentInfoInputText" class="input-sm" required="true" value="#{orderManager.newOrderShippingInfo}" /><br />
+
+                <h:outputLabel for="statusMenu" rendered="true" value="Status:&nbsp;" />
+                <h:selectOneMenu id="statusMenu" required="true" class="input-sm" value="#{orderManager.newOrderStatus}">
+                    <f:selectItem itemValue="Y" itemLabel="Zakończona" />
+                    <f:selectItem itemValue="N" itemLabel="W toku" />
+                </h:selectOneMenu><br />
+
+                <h:outputLabel for="discountMenu" rendered="true" value="Klasa sprawy:&nbsp;" />
+                <h:selectOneMenu id="discountMenu" required="true" class="input-sm" value="#{orderManager.newOrderDiscount}">
+                    <f:selectItem itemValue="1" itemLabel="1" />
+                    <f:selectItem itemValue="2" itemLabel="2" />
+                    <f:selectItem itemValue="3" itemLabel="3" />
+                    <f:selectItem itemValue="4" itemLabel="4" />
+                    <f:selectItem itemValue="0" itemLabel="0" />
+                </h:selectOneMenu><br />
+
+                <h:commandButton class="btn btn-success" value="Wyślij" action="#{orderManager.submitOrder}" />
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+

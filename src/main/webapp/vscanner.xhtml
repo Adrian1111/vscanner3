@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+        <h:head>
+        <title>VScan</title>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        
+        <h:outputStylesheet library="css" name="default.css"/>
+    </h:head>
+    
+    <ui:composition template="/order-template.xhtml">
+        
+
+        <ui:define name="body">
+
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="navbar-brand">VScan</li>
+  <li role="presentation" class="active"><a href="./">Strona Głowna</a></li>
+  <li role="presentation"><a href="new.xhtml" >Dodaj nową teczke</a></li>
+  <li role="presentation"><a href="search.xhtml" >Znajdź prawnika</a></li>
+
+</ul>
+
+        </ui:define>
+
+        <ui:define name="ordersTable">
+
+            <h:dataTable
+                class="table table-hover"
+                var="order"
+                summary="Table of orders"
+                value="#{orderManager.orders}"
+                rules="all"
+                cellpadding="5">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Numer sprawy" />
+                    </f:facet>
+                    <h:form>
+                        <h:commandLink  class="btn btn-default" id="order_id_link" action="show">
+                            <h:outputText value="#{order.orderId}" />
+                            <f:setPropertyActionListener target="#{orderManager.currentOrder}" value="#{order.orderId}" />
+                        </h:commandLink>
+                    </h:form>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Informacja" />
+                    </f:facet>
+                    <h:outputText value="#{order.shipmentInfo}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Status" />
+                    </f:facet>
+                    <h:outputText value="#{order.status}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Aktualizacja" />
+                    </f:facet>
+                    <h:outputText value="#{order.lastUpdate}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Sprawa klasy:" />
+                    </f:facet>
+                    <h:outputText value="#{order.discount}" />
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Akcje" />
+                    </f:facet>
+                    <h:form prependId="false">
+                        <h:commandLink class="btn btn-danger" value="Usuń" actionListener="#{orderManager.removeOrder}" action="vscanner">
+                            <f:param name="deleteOrderId" id="deleteOrderId" value="#{order.orderId}" />
+                        </h:commandLink>
+                    </h:form>
+                </h:column>
+            </h:dataTable>
+        </ui:define>       
+
+    </ui:composition>
+</html>

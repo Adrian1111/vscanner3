@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Dodawanie Skanów</title>
+        <h:outputStylesheet library="css" name="bootstrap.css"/>
+        
+        <h:outputStylesheet library="css" name="default.css"/>
+    </h:head>
+    <h:body>
+                    <ul class="nav nav-tabs">
+                <li role="presentation" class="navbar-brand">VScan</li>
+  <li role="presentation"><a href="./">Strona Głowna</a></li>
+  <li role="presentation" ><a href="new.xhtml" >Dodaj nową teczke</a></li>
+  <li role="presentation"><a href="search.xhtml" >Znajdź prawnika</a></li>
+
+</ul>
+        <h:form>
+            <br/>
+            <a href="show.xhtml" class="btn btn-default">Powrót do strony sprawy</a> 
+              <br/>
+                <br/>
+<!--            <h:commandButton value="Powrót do strony sprawy" action="welcomePrimefaces" />-->
+            
+        </h:form>
+
+        <h:form enctype="multipart/form-data" prependId="false">
+    <p:fileUpload
+        label="Dodaj"
+        uploadLabel="Dodaj"
+        mode="advanced"
+        fileUploadListener="#{orderManager.handleFileUpload}"
+        allowTypes="/(\.|\/)(gif|jpg|jpeg|gif|png|PNG|GIF|JPG|JPEG)$/" 
+        auto="true"/>
+
+
+                           <h:outputText value="Opisz skan" />
+
+                       
+                    <h:inputText  required="true" value="#{orderManager.selectedPartNumber}"></h:inputText>
+
+                    <h:commandButton value="Dodaj" class="btn btn-success" actionListener="#{orderManager.addPicture}" action="show">
+                        <f:param name="x" id="x" value="#{orderManager.url}" />
+                        <f:param name="y" id="y" value="#{orderManager.selectedPartNumber}" />
+<f:param name="z" id="z" value="#{orderManager.selectedVendorPartNumber}" />
+                    </h:commandButton>
+
+                </h:form>
+        
+        
+  
+    </h:body>
+</html>
+

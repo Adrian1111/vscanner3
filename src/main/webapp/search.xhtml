@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:composition template="/search-template.xhtml">
+
+        <ui:define name="body">
+
+            <ul class="nav nav-tabs">
+                <li role="presentation" class="navbar-brand">VScan</li>
+  <li role="presentation" ><a href="./">Strona Głowna</a></li> 
+  <li role="presentation"><a href="new.xhtml" >Dodaj nową teczke</a></li>
+  <li role="presentation" class="active"><a href="search.xhtml">Znajdź prawnika</a></li>
+
+</ul>
+
+        </ui:define>
+                <ui:define name="findVendorForm">
+            <h:form>
+                <h:outputLabel for="findVendorInputText" rendered="true" value="Szukaj: " />
+                <h:inputText id="findVendorInputText" class="input-sm" value="#{orderManager.vendorName}" />&nbsp;
+                <h:commandButton class="btn btn-default" id="findVendorButton" action="#{orderManager.findVendor}" value="Znajdź" />
+            </h:form>
+        </ui:define>
+        <ui:define name="findVendorTable">
+            <h:dataTable var="prawnik" 
+                         summary="Wykaz prawników"
+                         value="#{orderManager.vendorSearchResults}"
+                         rules="all"
+                         cellpadding="5"
+                         rendered="#{orderManager.findVendorTableDisabled}">
+                <h:column>
+                    <f:facet name="header">
+                        <h:outputText value="Prawnik" />
+                    </f:facet>
+                    <h:outputText value="#{prawnik}" />
+                </h:column>
+            </h:dataTable>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+
